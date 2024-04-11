@@ -1,4 +1,4 @@
-package com.in28minutes.springboot.myfirstwebapp.todo;
+package com.in28minutes.springboot.springbootwebapp.todo;
 
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Service;

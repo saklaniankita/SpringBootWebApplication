@@ -1,4 +1,4 @@
-package com.in28minutes.springboot.myfirstwebapp.hello;
+package com.in28minutes.springboot.springbootwebapp.hello;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,7 +14,6 @@ public class SayHelloController {
 
     /**
      * Not feasible and is very copmplex
-     * @return
      */
     @RequestMapping("say-hello-html")
     @ResponseBody

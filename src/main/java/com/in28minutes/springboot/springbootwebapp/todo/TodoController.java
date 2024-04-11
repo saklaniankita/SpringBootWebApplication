@@ -1,6 +1,7 @@
-package com.in28minutes.springboot.myfirstwebapp.todo;
+package com.in28minutes.springboot.springbootwebapp.todo;
 
 import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -9,26 +10,26 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttributes;
 
 import java.time.LocalDate;
 import java.util.List;
 
-@Controller
+//@Controller
 //@SessionAttributes("name")
 public class TodoController {
+    @Autowired
     private TodoService todoService;
 
-    public TodoController(TodoService todoService) {
-        super();
-        this.todoService = todoService;
-    }
+//    public TodoController(TodoService todoService) {
+//        super();
+//        this.todoService = todoService;
+//    }
 
     @RequestMapping("list-todos")
     public String listAllTodos(ModelMap model) {
         //String username = (String)model.get("name");
         String username = getLoggedInUsername();
-        System.out.println("Logged in user: username");
+        System.out.println("Logged in user: " + username);
         List<Todo> todos = todoService.findByUsername(username);
         model.put("todos", todos);
         return "listTodos";
@@ -51,7 +52,8 @@ public class TodoController {
 //        return "redirect:list-todos";
 //    }
 
-    /*Using Command Bean/Backing Object Concept here instead of using @RequestParam for all the fields in the bean
+    /*Using Command Bean/Backing Object Concept here instead of
+     * using @RequestParam for all the fields in the bean
      * @param map
      * @return
      */

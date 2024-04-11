@@ -1,4 +1,4 @@
-package com.in28minutes.springboot.myfirstwebapp.login;
+package com.in28minutes.springboot.springbootwebapp.login;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
