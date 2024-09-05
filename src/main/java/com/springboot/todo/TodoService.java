@@ -1,6 +1,8 @@
-package com.in28minutes.springboot.springbootwebapp.todo;
+package com.springboot.todo;
 
 import jakarta.validation.Valid;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -13,10 +15,12 @@ public class TodoService {
     private static List<Todo> todos = new ArrayList<>();
     private static int todosCount = 0;
 
+    private final Logger logger = LoggerFactory.getLogger(getClass());
+
     static{
-        todos.add(new Todo(++todosCount, "in28minutes", "Learn AWS", LocalDate.now().plusYears(1L), false));
-        todos.add(new Todo(++todosCount, "in28minutes", "Learn DevOps", LocalDate.now().plusYears(2L), false));
-        todos.add(new Todo(++todosCount, "in28minutes", "Learn Azure", LocalDate.now().plusYears(3L), false));
+        todos.add(new Todo(++todosCount, "ankita", "Learn AWS", LocalDate.now().plusYears(1L), false));
+        todos.add(new Todo(++todosCount, "ankita", "Learn DevOps", LocalDate.now().plusYears(2L), false));
+        todos.add(new Todo(++todosCount, "ankita", "Learn Azure", LocalDate.now().plusYears(3L), false));
     }
 
     public List<Todo> findByUsername(String username){
@@ -25,7 +29,7 @@ public class TodoService {
     }
 
     public void addTodo(String username, String description, LocalDate targetDate, boolean isDone) {
-        System.out.println("username in TodoService " + username);
+        logger.info("username in TodoService " + username);
         todos.add(new Todo(++todosCount, username, description, targetDate, isDone));
     }
 

@@ -1,4 +1,4 @@
-package com.in28minutes.springboot.springbootwebapp.hello;
+package com.springboot.hello;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

@@ -1,6 +1,4 @@
-package com.in28minutes.springboot.springbootwebapp.security;
-
-import static org.springframework.security.config.Customizer.withDefaults;
+package com.springboot.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,6 +11,8 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
 import java.util.function.Function;
+
+import static org.springframework.security.config.Customizer.withDefaults;
 
 /**
  * We achieve following features using spring Security
@@ -27,8 +27,8 @@ public class SpringSecurityConfiguration {
     @Bean
     public InMemoryUserDetailsManager userDetailsService() {
 
-            UserDetails userDetails1 = createNewUser("in28minutes", "dummy");
-            UserDetails userDetails2 = createNewUser("ranga", "dummydummy");
+            UserDetails userDetails1 = createNewUser("ankita", "pass1");
+            UserDetails userDetails2 = createNewUser("saklani", "pass2");
 
             return new InMemoryUserDetailsManager(userDetails1, userDetails2);
         }

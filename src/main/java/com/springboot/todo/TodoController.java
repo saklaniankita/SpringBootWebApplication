@@ -1,10 +1,11 @@
-package com.in28minutes.springboot.springbootwebapp.todo;
+package com.springboot.todo;
 
 import jakarta.validation.Valid;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +20,7 @@ import java.util.List;
 public class TodoController {
     @Autowired
     private TodoService todoService;
+    private final Logger logger = LoggerFactory.getLogger(getClass());
 
 //    public TodoController(TodoService todoService) {
 //        super();
@@ -29,7 +31,7 @@ public class TodoController {
     public String listAllTodos(ModelMap model) {
         //String username = (String)model.get("name");
         String username = getLoggedInUsername();
-        System.out.println("Logged in user: " + username);
+        logger.info("Logged in user: " + username);
         List<Todo> todos = todoService.findByUsername(username);
         model.put("todos", todos);
         return "listTodos";
@@ -47,7 +49,7 @@ public class TodoController {
 //    @RequestMapping(value = "add-todo", method = RequestMethod.POST)
 //    public String addToDo(@RequestParam String description, ModelMap map){
 //        String username = (String)map.get("name");
-//        System.out.println("username in TodoController: "+username);
+//        logger.info("username in TodoController: "+username);
 //        todoService.addTodo(username, description, LocalDate.now().plusYears(1), false);
 //        return "redirect:list-todos";
 //    }
@@ -64,7 +66,7 @@ public class TodoController {
         }
         //String username = (String) model.get("name");
         String username = getLoggedInUsername();
-        System.out.println("username in TodoController: " + username);
+        logger.info("username in TodoController: " + username);
         todoService.addTodo(username, todo.getDescription(), todo.getTargetDate(), false);
         return "redirect:list-todos";
     }
@@ -80,13 +82,11 @@ public class TodoController {
     public String showUpdateToDoPage(@RequestParam int id, ModelMap model) {
         Todo todo = todoService.findById(id);
         model.put("todo", todo);
-        System.out.println("1");
         return "todo";
     }
 
     @RequestMapping(value = "update-todo", method = RequestMethod.POST)
     public String updateToDo(ModelMap model, @Valid Todo todo, BindingResult result) {
-        System.out.println("2");
         if (result.hasErrors()) {
             return "todo";
         }

@@ -1,7 +1,8 @@
-package com.in28minutes.springboot.springbootwebapp.todo;
+package com.springboot.todo;
 
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -18,6 +19,7 @@ import java.util.List;
 //@SessionAttributes("name")
 public class TodoControllerJpa {
     private TodoRepository todoRepository;
+    private final Logger logger = LoggerFactory.getLogger(getClass());
 
     public TodoControllerJpa(TodoRepository todoRepository) {
         super();
@@ -28,7 +30,7 @@ public class TodoControllerJpa {
     public String listAllTodos(ModelMap model) {
         //String username = (String)model.get("name");
         String username = getLoggedInUsername();
-        System.out.println("Logged in user: " + username);
+        logger.info("Logged in user: " + username);
         List<Todo> todos = todoRepository.findByUsername(username);
         model.put("todos", todos);
         return "listTodos";
@@ -46,7 +48,7 @@ public class TodoControllerJpa {
 //    @RequestMapping(value = "add-todo", method = RequestMethod.POST)
 //    public String addToDo(@RequestParam String description, ModelMap map){
 //        String username = (String)map.get("name");
-//        System.out.println("username in TodoController: "+username);
+//        logger.info("username in TodoController: "+username);
 //        todoService.addTodo(username, description, LocalDate.now().plusYears(1), false);
 //        return "redirect:list-todos";
 //    }
@@ -63,7 +65,7 @@ public class TodoControllerJpa {
         }
         //String username = (String) model.get("name");
         String username = getLoggedInUsername();
-        System.out.println("username in TodoController: " + username);
+        logger.info("username in TodoController: " + username);
         todo.setUsername(username);
         todoRepository.save(todo);
         //todoService.addTodo(username, todo.getDescription(), todo.getTargetDate(), todo.isDone());
